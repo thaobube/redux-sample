@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface AddEditPageProps {}
 
 const AddEditPage: React.FunctionComponent<AddEditPageProps> = () => {
     const [message, setMessage] = useState('');
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
@@ -20,6 +21,7 @@ const AddEditPage: React.FunctionComponent<AddEditPageProps> = () => {
         <div>
             <p>Photo AddEdit Page</p>
             <p>{message}</p>
+            <button onClick={() => navigate('/')}>Go to Main page</button>
         </div>
     );
 };
