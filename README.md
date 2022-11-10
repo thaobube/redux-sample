@@ -5,21 +5,28 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Setup Environment
 
 1. Setup SCSS
+
 ```
+npm install --save-dev node-sass
 npm install --save-dev @types/node-sass
 ```
+
 2. Setup React-router
+
 ```
 npm install react-router-dom
 npm install --save @types/react-router-dom
 ```
+
 3. Setup UI
+
 ```
 npm i bootstrap
 npm i --save reactstrap
 ```
 
 ## Folder Structure
+
 ```
 src
 |__ assets
@@ -41,6 +48,8 @@ src
     |__photoSlice.js
     |__index.js
 ```
+
 ## Routing structure
-- use lazy load components
-- only load necessary feature
+
+-   use lazy load components
+-   only load necessary feature
