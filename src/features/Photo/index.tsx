@@ -5,7 +5,7 @@ interface PhotoProps {}
 
 const Photo: React.FunctionComponent<PhotoProps> = () => {
     return (
-        <div style={{ border: 2, borderColor: 'red', borderStyle: 'solid' }}>
+        <div>
             <Outlet />
         </div>
     );
