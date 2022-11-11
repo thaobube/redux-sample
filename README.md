@@ -24,6 +24,7 @@ npm install --save @types/react-router-dom
 npm i bootstrap
 npm i --save reactstrap
 npm install --save react-select
+npm install --save formik
 ```
 
 ## Folder Structure

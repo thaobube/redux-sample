@@ -1,47 +1,57 @@
 import * as React from 'react';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, FormGroup, Input, Label } from 'reactstrap';
 import Select from 'react-select';
-import { PHOTO_CATEGORY_OPTIONS } from '../../../../constants/global';
-import Images from '../../../../constants/images';
+import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
+import Images from 'constants/images';
+import { Formik, Form, FastField, FormikProps, FormikValues } from 'formik';
+import InputField from 'custom-fields/InputField';
+import SelectField from 'custom-fields/SelectField';
+import RandomPhotoField from './../../../../custom-fields/RandomPhotoField/index';
 
 interface PhotoFormProps {}
 
-const PhotoForm: React.FunctionComponent<PhotoFormProps> = () => {
+const PhotoForm: React.FunctionComponent<PhotoFormProps> = (props) => {
+    const initialValues = {
+        title: '',
+        categoryId: null,
+    };
     return (
-        <Form>
-            <FormGroup>
-                <Label for='titleId'>Title</Label>
-                <Input name='title' id='titleId' placeholder='Ef: Nature...' />
-            </FormGroup>
-            <FormGroup>
-                <Label for='categoryId'>Category</Label>
-                <Select
-                    id='categoryId'
-                    name='categoryId'
-                    placeholder='What is your photo category?'
-                    options={PHOTO_CATEGORY_OPTIONS}
-                />
-            </FormGroup>
-            <FormGroup>
-                <Label for='randomPhoto'>Photo</Label>
-                <div>
-                    <Button type='button' outline color='primary'>
-                        Random a photo
-                    </Button>
-                </div>
-                <div>
-                    <img
-                        width='200px'
-                        height='200px'
-                        src={Images.COLORFUL_BG}
-                        alt='colorfulBackground'
-                    />
-                </div>
-            </FormGroup>
-            <FormGroup>
-                <Button color='primary'>Add to album</Button>
-            </FormGroup>
-        </Form>
+        <Formik
+            initialValues={initialValues}
+            onSubmit={(values) => {
+                console.log('Submit values: ', values);
+            }}
+        >
+            {(formikProps) => {
+                // do something here
+                const { values, errors, touched } = formikProps;
+                console.log({ values, errors, touched });
+                return (
+                    <Form>
+                        <FastField
+                            name='title'
+                            component={InputField}
+                            label='Title'
+                            placeholder='Eg: Nature...'
+                        />
+                        <FastField
+                            name='categoryId'
+                            component={SelectField}
+                            label='Category'
+                            placeholder='What is your photo category?'
+                            options={PHOTO_CATEGORY_OPTIONS}
+                        />
+
+                        <FastField name='photo' component={RandomPhotoField} label='Photo' />
+                        <FormGroup>
+                            <Button type='submit' color='primary'>
+                                Add to album
+                            </Button>
+                        </FormGroup>
+                    </Form>
+                );
+            }}
+        </Formik>
     );
 };
 
