@@ -3,13 +3,15 @@ import InputField from 'custom-fields/InputField';
 import SelectField from 'custom-fields/SelectField';
 import { FastField, Form, Formik } from 'formik';
 import * as React from 'react';
-import { Button, FormGroup } from 'reactstrap';
+import { Button, FormGroup, Spinner } from 'reactstrap';
 import RandomPhotoField from 'custom-fields/RandomPhotoField/index';
 import * as Yup from 'yup';
 
-interface PhotoFormProps {}
+interface PhotoFormProps {
+    onSubmit: (...args: any[]) => void;
+}
 
-const PhotoForm: React.FunctionComponent<PhotoFormProps> = (props) => {
+const PhotoForm: React.FunctionComponent<PhotoFormProps> = ({ onSubmit }: PhotoFormProps) => {
     const initialValues = {
         title: '',
         categoryId: null,
@@ -33,14 +35,12 @@ const PhotoForm: React.FunctionComponent<PhotoFormProps> = (props) => {
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => {
-                console.log('Submit values: ', values);
-            }}
+            onSubmit={onSubmit}
         >
             {(formikProps) => {
                 // do something here
-                const { values, errors, touched } = formikProps;
-                console.log({ values, errors, touched });
+                const { values, errors, touched, isSubmitting } = formikProps;
+                // console.log({ values, errors, touched });
                 return (
                     <Form>
                         <FastField
@@ -60,6 +60,7 @@ const PhotoForm: React.FunctionComponent<PhotoFormProps> = (props) => {
                         <FastField name='photo' component={RandomPhotoField} label='Photo' />
                         <FormGroup>
                             <Button type='submit' color='primary'>
+                                {isSubmitting && <Spinner size='sm' />}
                                 Add to album
                             </Button>
                         </FormGroup>

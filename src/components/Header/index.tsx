@@ -23,12 +23,12 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
 
                     <Col xs='auto'>
                         <NavLink
-                            to='/photos/add'
+                            to='/photos'
                             className={({ isActive }) =>
                                 isActive ? 'header__link header__link--active' : 'header__link'
                             }
                         >
-                            Add photo
+                            Home Page
                         </NavLink>
                     </Col>
                 </Row>
