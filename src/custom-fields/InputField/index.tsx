@@ -1,10 +1,11 @@
+import { ErrorMessage } from 'formik';
 import * as React from 'react';
-import { FormGroup, Input, Label } from 'reactstrap';
+import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
 import { InputType } from 'reactstrap/types/lib/Input';
 
 interface InputFieldProps {
     field: { name: string; value: any; onChange: any; onBlur: any };
-    form: { touched: boolean; errors: any; setFieldValue: any };
+    form: { touched: any; errors: any; setFieldValue: any };
 
     type: InputType | undefined;
     label: string;
@@ -33,6 +34,8 @@ const InputField: React.FunctionComponent<InputFieldProps> = ({
     disabled,
 }: InputFieldProps) => {
     const { name } = field;
+    const { errors, touched } = form;
+    const showError = errors[name] && touched[name];
     return (
         <FormGroup>
             {label && <Label for={name}>{label}</Label>}
@@ -42,7 +45,9 @@ const InputField: React.FunctionComponent<InputFieldProps> = ({
                 type={defaultPropValues.type}
                 disabled={defaultPropValues.disabled}
                 placeholder={placeholder}
+                invalid={showError}
             />
+            <ErrorMessage name={name} component={FormFeedback} />
         </FormGroup>
     );
 };

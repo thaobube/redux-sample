@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { Button, FormGroup, Input, Label } from 'reactstrap';
-import Select from 'react-select';
 import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
-import Images from 'constants/images';
-import { Formik, Form, FastField, FormikProps, FormikValues } from 'formik';
 import InputField from 'custom-fields/InputField';
 import SelectField from 'custom-fields/SelectField';
-import RandomPhotoField from './../../../../custom-fields/RandomPhotoField/index';
+import { FastField, Form, Formik } from 'formik';
+import * as React from 'react';
+import { Button, FormGroup } from 'reactstrap';
+import RandomPhotoField from 'custom-fields/RandomPhotoField/index';
+import * as Yup from 'yup';
 
 interface PhotoFormProps {}
 
@@ -14,10 +13,26 @@ const PhotoForm: React.FunctionComponent<PhotoFormProps> = (props) => {
     const initialValues = {
         title: '',
         categoryId: null,
+        photo: '',
     };
+
+    const validationSchema = Yup.object().shape({
+        title: Yup.string().required('This field is required.'),
+
+        categoryId: Yup.number().required('This field is required.').nullable(),
+
+        photo: Yup.string().required('This field is required.'),
+        // example: if only the category for Technology is required:
+        // photo: Yup.string().when('categoryId', {
+        //     is: 1,
+        //     then: Yup.string().required('This field is required.'),
+        //     otherwise: Yup.string().notRequired(),
+        // }),
+    });
     return (
         <Formik
             initialValues={initialValues}
+            validationSchema={validationSchema}
             onSubmit={(values) => {
                 console.log('Submit values: ', values);
             }}

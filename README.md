@@ -1,6 +1,6 @@
 # React-ReduxToolkit-Photo-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+This assignment uses React & Typescript, Redux Toolkit, Formik, Yup and reactstrap.
 
 ## Setup Environment
 
@@ -25,6 +25,8 @@ npm i bootstrap
 npm i --save reactstrap
 npm install --save react-select
 npm install --save formik
+npm install yup
+
 ```
 
 ## Folder Structure
