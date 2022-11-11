@@ -20,7 +20,7 @@ function App() {
                         <Route path='photos' element={<Photo />}>
                             <Route index element={<MainPage />} />
                             <Route path='add' element={<AddEditPage />} />
-                            <Route path=':id' element={<AddEditPage />} />
+                            <Route path=':photoId' element={<AddEditPage />} />
                             <Route path='*' element={<NotFound />} />
                         </Route>
                         <Route path='*' element={<NotFound />} />

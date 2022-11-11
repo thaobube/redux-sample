@@ -47,7 +47,12 @@ const RandomPhoto: React.FunctionComponent<RandomPhotoProps> = ({
             </div>
             <div className='random-photo__photo'>
                 {imageUrl && (
-                    <img src={imageUrl} alt='Not found image. Please click to random again.' />
+                    // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                    <img
+                        src={imageUrl}
+                        alt='Not found image. Please click to random again.'
+                        onError={handleRandomPhotoClick}
+                    />
                 )}
             </div>
         </div>

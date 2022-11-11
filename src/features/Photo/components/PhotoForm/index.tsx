@@ -6,18 +6,19 @@ import * as React from 'react';
 import { Button, FormGroup, Spinner } from 'reactstrap';
 import RandomPhotoField from 'custom-fields/RandomPhotoField/index';
 import * as Yup from 'yup';
+import { PhotoState } from 'features/Photo/photoSlice';
 
 interface PhotoFormProps {
     onSubmit: (...args: any[]) => void;
+    initialValues: PhotoState;
+    isAddMode: boolean;
 }
 
-const PhotoForm: React.FunctionComponent<PhotoFormProps> = ({ onSubmit }: PhotoFormProps) => {
-    const initialValues = {
-        title: '',
-        categoryId: null,
-        photo: '',
-    };
-
+const PhotoForm: React.FunctionComponent<PhotoFormProps> = ({
+    onSubmit,
+    initialValues,
+    isAddMode,
+}: PhotoFormProps) => {
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('This field is required.'),
 
@@ -59,9 +60,9 @@ const PhotoForm: React.FunctionComponent<PhotoFormProps> = ({ onSubmit }: PhotoF
 
                         <FastField name='photo' component={RandomPhotoField} label='Photo' />
                         <FormGroup>
-                            <Button type='submit' color='primary'>
+                            <Button type='submit' color={isAddMode ? 'primary' : 'success'}>
                                 {isSubmitting && <Spinner size='sm' />}
-                                Add to album
+                                {isAddMode ? 'Add to album' : 'Update your photo'}
                             </Button>
                         </FormGroup>
                     </Form>
